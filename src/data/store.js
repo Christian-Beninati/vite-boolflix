@@ -4,5 +4,6 @@ import { reactive } from "vue";
 // Esporto la variabile Store con funzione Reactive
 export const store = reactive({
     
-    
+    // proprietà "movies" vuota.
+    movies: [],
 });
