@@ -21,6 +21,6 @@ export default {
   <AppMain />
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use './assets///scss/style.scss'
 </style>
