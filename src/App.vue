@@ -1,5 +1,10 @@
 <script>
 
+// Import axios
+import axios from 'axios';
+// Endpoint
+
+
 // Import AppHeader
 import AppHeader from './/components/AppHeader.vue';
 
