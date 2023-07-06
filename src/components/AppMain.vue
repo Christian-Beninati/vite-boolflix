@@ -4,7 +4,11 @@
 import { store } from '../data/store.js';
 
 export default {
-    props: ['movies', 'series'],
+    data() {
+        return {
+            store
+        }
+    },
 
     computed: {
         flagImages() {
@@ -39,7 +43,7 @@ export default {
         <section id="films">
             <h1>Films</h1>
             <ul>
-                <li v-for="movie in movies" :key="movie.id">
+                <li v-for="movie in store.movies" :key="movie.id">
                     <img :src="coverImagePath(movie.poster_path)" :alt="movie.title" />
                     <h3>{{ movie.title }}</h3>
                     <p>{{ movie.original_title }}</p>
@@ -57,7 +61,7 @@ export default {
         <section id="series">
             <h1>Series</h1>
             <ul>
-                <li v-for="serie in series" :key="serie.id">
+                <li v-for="serie in store.series" :key="serie.id">
                     <img :src="coverImagePath(serie.poster_path)" :alt="serie.name" />
                     <h3>{{ serie.name }}</h3>
                     <p>{{ serie.original_name }}</p>

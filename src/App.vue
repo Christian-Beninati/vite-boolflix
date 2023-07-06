@@ -48,10 +48,8 @@ export default {
 
       axios.all([movieRequest, tvRequest])
         .then(axios.spread((movieResponse, tvResponse) => {
-          const movies = movieResponse.data.results;
-          const series = tvResponse.data.results;
-          store.movies = movies;
-          store.series = series;
+          store.movies = movieResponse.data.results;
+          store.series = tvResponse.data.results;
         }))
         .catch(error => {
           console.error(error);
@@ -72,7 +70,7 @@ export default {
   <!-- AppMain -->
 
   <!-- Passo la proprietà "movies" e "series" dallo store al componente AppMain -->
-  <AppMain :movies="store.movies" :series="store.series" />
+  <AppMain :store="store" />
 </template>
 
  <!-- ? ------------- STYLE ------------->
