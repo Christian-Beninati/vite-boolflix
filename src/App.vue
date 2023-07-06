@@ -28,17 +28,33 @@ export default {
     };
   },
 
+  // ------------ COMPUTED --------
+  computed: {
+    apiConfig() {
+      return {
+        params: {
+          api_key: this.api_Key,
+          language: 'it-IT',
+        },
+      };
+    },
+  },
+
   // ------------ MEHODS --------
   methods: {
-    handleSearch(searchTerm) { // Gestisco l'evento di ricerca
-      // Chiamata all'API per ottenere i film
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.api_Key}&query=${searchTerm}&language=it-IT`)
-        .then(response => {
-          const movies = response.data.results; // Ottengo i film dalla risposta
-          store.movies = movies; // Aggiorno lo store con i film trovati
-        })
+    handleSearch(searchTerm) {
+      const movieRequest = axios.get(`https://api.themoviedb.org/3/search/movie?query=${searchTerm}`, this.apiConfig);
+      const tvRequest = axios.get(`https://api.themoviedb.org/3/search/tv?query=${searchTerm}`, this.apiConfig);
+
+      axios.all([movieRequest, tvRequest])
+        .then(axios.spread((movieResponse, tvResponse) => {
+          const movies = movieResponse.data.results;
+          const series = tvResponse.data.results;
+          store.movies = movies;
+          store.series = series;
+        }))
         .catch(error => {
-          console.error(error); // Error
+          console.error(error);
         });
     },
   },
@@ -55,8 +71,8 @@ export default {
 
   <!-- AppMain -->
 
-  <!-- Passo la proprietà "movies" dallo store al componente AppMain -->
-  <AppMain :movies="store.movies" />
+  <!-- Passo la proprietà "movies" e "series" dallo store al componente AppMain -->
+  <AppMain :movies="store.movies" :series="store.series" />
 </template>
 
  <!-- ? ------------- STYLE ------------->

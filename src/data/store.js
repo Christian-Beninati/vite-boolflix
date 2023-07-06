@@ -6,4 +6,5 @@ export const store = reactive({
     
     // proprietà "movies" vuota.
     movies: [],
+    series: []
 });
