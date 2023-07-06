@@ -32,7 +32,18 @@ export default {
             } else {
                 return '';
             }
-        }
+        },
+        getRatingStars(vote) {
+            const roundedRating = Math.ceil(vote / 2);
+            const fullStars = roundedRating;
+            const emptyStars = 5 - roundedRating;
+
+            return {
+                fullStars: Array(fullStars).fill("fa-solid fa-star"),
+                emptyStars: Array(emptyStars).fill("fa-regular fa-star"),
+            };
+        },
+
     }
 };
 </script>
@@ -52,7 +63,13 @@ export default {
                     <template v-else>
                         <p>{{ movie.original_language }}</p>
                     </template>
-                    <p>Voto: {{ movie.vote_average }}</p>
+                    <!-- star rating -->
+                    <div>
+                        <i v-for="starClass in getRatingStars(movie.vote_average).fullStars" :key="starClass"
+                            :class="starClass"></i>
+                        <i v-for="starClass in getRatingStars(movie.vote_average).emptyStars" :key="starClass"
+                            :class="starClass"></i>
+                    </div>
                 </li>
             </ul>
         </section>
@@ -70,7 +87,13 @@ export default {
                     <template v-else>
                         <p>{{ serie.original_language }}</p>
                     </template>
-                    <p>Voto: {{ serie.vote_average }}</p>
+                    <!-- star rating -->
+                    <div>
+                        <i v-for="starClass in getRatingStars(serie.vote_average).fullStars" :key="starClass"
+                            :class="starClass"></i>
+                        <i v-for="starClass in getRatingStars(serie.vote_average).emptyStars" :key="starClass"
+                            :class="starClass"></i>
+                    </div>
                 </li>
             </ul>
         </section>
