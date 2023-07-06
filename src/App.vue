@@ -13,6 +13,8 @@ import AppHeader from './/components/AppHeader.vue';
 // Import AppMain
 import AppMain from './/components/AppMain.vue';
 
+// URL di base delle immagini
+const imageBaseUrl = 'https://image.tmdb.org/t/p/w342';
 
 export default {
   // Registro componenti come componenti figli
@@ -70,7 +72,7 @@ export default {
   <!-- AppMain -->
 
   <!-- Passo la proprietà "movies" e "series" dallo store al componente AppMain -->
-  <AppMain :store="store" />
+  <AppMain :movies="store.movies" :series="store.series" />
 </template>
 
  <!-- ? ------------- STYLE ------------->

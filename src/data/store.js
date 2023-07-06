@@ -7,5 +7,4 @@ export const store = reactive({
     // proprietà "movies" vuota.
     movies: [],
     series: [],
-    imageBaseUrl: 'https://image.tmdb.org/t/p/w342',
 });
