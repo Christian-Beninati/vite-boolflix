@@ -51,10 +51,10 @@ export default {
 
 <template>
     <main>
-        <section id="films">
-            <h2>Films</h2>
-            <ul>
-                <li v-for="movie in movies" :key="movie.id">
+        <section id="films" class="container ">
+            <h2 class="mt-5">Films</h2>
+            <ul class="card-container">
+                <li v-for="movie in movies" :key="movie.id" class="card">
                     <img :src="coverImagePath(movie.poster_path)" :alt="movie.title" />
                     <h3>{{ movie.title }}</h3>
                     <p>{{ movie.original_title }}</p>
@@ -75,10 +75,10 @@ export default {
             </ul>
         </section>
 
-        <section id="series">
+        <section id="series" class="container ">
             <h2>Series</h2>
-            <ul>
-                <li v-for="serie in series" :key="serie.id">
+            <ul class="card-container">
+                <li v-for="serie in series" :key="serie.id" class="card">
                     <img :src="coverImagePath(serie.poster_path)" :alt="serie.name" />
                     <h3>{{ serie.name }}</h3>
                     <p>{{ serie.original_name }}</p>
@@ -103,10 +103,23 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/scss/vars' as *;
+@use '../assets/scss/mixins' as *;
+
 
 main {
     height: calc(100vh - 100px);
     background-color: $grey;
     overflow-y: auto;
+}
+
+.card-container {
+    @include flexbox(start, stretch, row, wrap);
+    padding: 60px 0;
+    gap: 20px;
+}
+
+.card {
+    flex-basis: calc(100% / 4 - 15px);
+    cursor: pointer;
 }
 </style>
