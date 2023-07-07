@@ -5,7 +5,8 @@ export default {
     data() {
         return {
             imageBaseUrl: 'https://image.tmdb.org/t/p/w342',
-            placeholder: 'https://marcolanci.it/utils/poster-placeholder.png'
+            placeholder: 'https://marcolanci.it/utils/poster-placeholder.png',
+            showInfo: false,
         }
     },
     props: ['movies', 'series'],
@@ -54,23 +55,32 @@ export default {
         <section id="films" class="container ">
             <h2 class="mt-5">Films</h2>
             <ul class="card-container">
-                <li v-for="movie in movies" :key="movie.id" class="card">
+                <li v-for="movie in movies" :key="movie.id" class="card" @mouseover="showInfo = movie.id"
+                    @mouseout="showInfo = null">
+
+                    <!-- Cover Image Path -->
                     <img :src="coverImagePath(movie.poster_path)" :alt="movie.title" />
-                    <h3>{{ movie.title }}</h3>
-                    <p>{{ movie.original_title }}</p>
-                    <template v-if="hasFlagLanguage(movie.original_language)">
-                        <img :src="flagImagePath(movie.original_language)" :alt="movie.original_language" />
-                    </template>
-                    <template v-else>
-                        <p>{{ movie.original_language }}</p>
-                    </template>
-                    <!-- star rating -->
-                    <div>
-                        <i v-for="starClass in getRatingStars(movie.vote_average).fullStars" :key="starClass"
-                            :class="starClass"></i>
-                        <i v-for="starClass in getRatingStars(movie.vote_average).emptyStars" :key="starClass"
-                            :class="starClass"></i>
+
+                    <!-- Movie Info -->
+                    <div class="movie-info-wrapper text-center" v-show="showInfo === movie.id">
+                        <h3>{{ movie.title }}</h3>
+                        <p>{{ movie.original_title }}</p>
+                        <template v-if="hasFlagLanguage(movie.original_language)">
+                            <img class="img-flag" :src="flagImagePath(movie.original_language)"
+                                :alt="movie.original_language" />
+                        </template>
+                        <template v-else>
+                            <p>{{ movie.original_language }}</p>
+                        </template>
+                        <!-- star rating -->
+                        <div>
+                            <i v-for="starClass in getRatingStars(movie.vote_average).fullStars" :key="starClass"
+                                :class="starClass"></i>
+                            <i v-for="starClass in getRatingStars(movie.vote_average).emptyStars" :key="starClass"
+                                :class="starClass"></i>
+                        </div>
                     </div>
+
                 </li>
             </ul>
         </section>
@@ -78,22 +88,30 @@ export default {
         <section id="series" class="container ">
             <h2>Series</h2>
             <ul class="card-container">
-                <li v-for="serie in series" :key="serie.id" class="card">
+                <li v-for="serie in series" :key="serie.id" class="card" @mouseover="showInfo = serie.id"
+                    @mouseout="showInfo = null">
+
+                    <!-- Cover Image Path -->
                     <img :src="coverImagePath(serie.poster_path)" :alt="serie.name" />
-                    <h3>{{ serie.name }}</h3>
-                    <p>{{ serie.original_name }}</p>
-                    <template v-if="hasFlagLanguage(serie.original_language)">
-                        <img :src="flagImagePath(serie.original_language)" :alt="serie.original_language" />
-                    </template>
-                    <template v-else>
-                        <p>{{ serie.original_language }}</p>
-                    </template>
-                    <!-- star rating -->
-                    <div>
-                        <i v-for="starClass in getRatingStars(serie.vote_average).fullStars" :key="starClass"
-                            :class="starClass"></i>
-                        <i v-for="starClass in getRatingStars(serie.vote_average).emptyStars" :key="starClass"
-                            :class="starClass"></i>
+
+                    <!-- Movie Info -->
+                    <div class="movie-info-wrapper text-center" v-show="showInfo === serie.id">
+                        <h3>{{ serie.name }}</h3>
+                        <p>{{ serie.original_name }}</p>
+                        <template v-if="hasFlagLanguage(serie.original_language)">
+                            <img class="img-flag" :src="flagImagePath(serie.original_language)"
+                                :alt="serie.original_language" />
+                        </template>
+                        <template v-else>
+                            <p>{{ serie.original_language }}</p>
+                        </template>
+                        <!-- star rating -->
+                        <div>
+                            <i v-for="starClass in getRatingStars(serie.vote_average).fullStars" :key="starClass"
+                                :class="starClass"></i>
+                            <i v-for="starClass in getRatingStars(serie.vote_average).emptyStars" :key="starClass"
+                                :class="starClass"></i>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -121,5 +139,29 @@ main {
 .card {
     flex-basis: calc(100% / 4 - 15px);
     cursor: pointer;
+    position: relative;
+    border: 0;
+}
+
+.movie-info-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+
+
+.img-flag {
+    width: 100px;
+    padding-bottom: 10px;
 }
 </style>
