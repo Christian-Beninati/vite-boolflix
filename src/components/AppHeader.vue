@@ -24,7 +24,7 @@ export default {
         <div class="search-form d-flex align-items-center justify-content-between container h-100">
             <h1 class="m-0">Boolflix</h1>
             <!-- Ascolta l'evento "submit"  per avviare la ricerca -->
-            <SearchForm @submit="handleSearch" class="d-flex" />
+            <SearchForm @submit="handleSearch" />
         </div>
     </header>
 </template>

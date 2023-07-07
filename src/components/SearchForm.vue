@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitForm" class="d-flex">
         <!-- Input per il termine di ricerca, collegato a "searchTerm" tramite v-model -->
         <input type="text" class="form-control " placeholder="Search..." v-model.trim="searchTerm">
         <!-- button -->
