@@ -5,6 +5,7 @@ export default {
     data() {
         return {
             imageBaseUrl: 'https://image.tmdb.org/t/p/w342',
+            placeholder: 'https://marcolanci.it/utils/poster-placeholder.png'
         }
     },
     props: ['movies', 'series'],
@@ -30,7 +31,7 @@ export default {
             if (posterPath) {
                 return this.imageBaseUrl + posterPath;
             } else {
-                return '';
+                return this.placeholder;
             }
         },
         getRatingStars(vote) {
