@@ -52,7 +52,7 @@ export default {
 
 <template>
     <main>
-        <section id="films" class="container ">
+        <section id="films" class="container" v-if="movies.length > 0">
             <h2 class="mt-5">Films</h2>
             <ul class="card-container">
                 <li v-for="movie in movies" :key="movie.id" class="card" @mouseover="showInfo = movie.id"
@@ -85,7 +85,7 @@ export default {
             </ul>
         </section>
 
-        <section id="series" class="container ">
+        <section id="series" class="container" v-if="series.length > 0">
             <h2>Series</h2>
             <ul class="card-container">
                 <li v-for="serie in series" :key="serie.id" class="card" @mouseover="showInfo = serie.id"
