@@ -52,7 +52,7 @@ export default {
 <template>
     <main>
         <section id="films">
-            <h1>Films</h1>
+            <h2>Films</h2>
             <ul>
                 <li v-for="movie in movies" :key="movie.id">
                     <img :src="coverImagePath(movie.poster_path)" :alt="movie.title" />
@@ -76,7 +76,7 @@ export default {
         </section>
 
         <section id="series">
-            <h1>Series</h1>
+            <h2>Series</h2>
             <ul>
                 <li v-for="serie in series" :key="serie.id">
                     <img :src="coverImagePath(serie.poster_path)" :alt="serie.name" />
@@ -101,4 +101,12 @@ export default {
     </main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use '../assets/scss/vars' as *;
+
+main {
+    height: calc(100vh - 100px);
+    background-color: $grey;
+    overflow-y: auto;
+}
+</style>

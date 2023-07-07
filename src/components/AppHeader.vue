@@ -20,8 +20,33 @@ export default {
 </script>
 
 <template>
-    <!-- Ascolta l'evento "submit"  per avviare la ricerca -->
-    <SearchForm @submit="handleSearch" />
+    <header>
+        <div class="search-form d-flex align-items-center justify-content-between container h-100">
+            <h1 class="m-0">Boolflix</h1>
+            <!-- Ascolta l'evento "submit"  per avviare la ricerca -->
+            <SearchForm @submit="handleSearch" class="d-flex" />
+        </div>
+    </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+@use '../assets/scss/vars' as *;
+
+header {
+    height: 100px;
+    background-color: $black;
+}
+
+h1 {
+    color: $red;
+    text-transform: uppercase;
+    font-size: 45px;
+}
+
+
+button {
+    background-color: $red;
+    color: $white;
+    padding: 0 10px;
+}
+</style>
